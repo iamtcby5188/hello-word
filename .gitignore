@@ -45,6 +45,7 @@ hello_word/bin/Release/
 *.scc
 *.opensdf
 *.ipch
+*.sdf
 
 
 #log files
