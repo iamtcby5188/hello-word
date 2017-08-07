@@ -44,6 +44,8 @@ hello_word/bin/Release/
 *.svclog
 *.scc
 *.opensdf
+*.ipch
+
 
 #log files
 *.log
