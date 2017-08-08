@@ -8,6 +8,8 @@
 #include <memory>
 #include <unordered_map>
 
+#include "../BasicTools/BasicTools.h"
+#pragma comment(lib,"BasicTools.lib")
 class implementation
 {
 public:
@@ -58,8 +60,9 @@ void test3()
 int _tmain(int argc, _TCHAR* argv[])
 {   
     //test();
-    test2();
+    //test2();
     //test3();
+    std::cout << Test(1, 2) << std::endl;
 	return 0;
 }
 

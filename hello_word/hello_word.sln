@@ -4,8 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_ptr", "shared_ptr\shared_ptr.vcxproj", "{C4BAB626-0D5B-46AD-97B3-0D081AD71DC2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{52CE204B-DDC9-4D64-9110-6CA34C9DBF09} = {52CE204B-DDC9-4D64-9110-6CA34C9DBF09}
+		{4812C1CE-8A2F-49C0-8C18-D1469EDEBAD1} = {4812C1CE-8A2F-49C0-8C18-D1469EDEBAD1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "thread", "thread\thread.vcxproj", "{4812C1CE-8A2F-49C0-8C18-D1469EDEBAD1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{52CE204B-DDC9-4D64-9110-6CA34C9DBF09} = {52CE204B-DDC9-4D64-9110-6CA34C9DBF09}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicTools", "BasicTools\BasicTools.vcxproj", "{52CE204B-DDC9-4D64-9110-6CA34C9DBF09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +30,10 @@ Global
 		{4812C1CE-8A2F-49C0-8C18-D1469EDEBAD1}.Debug|Win32.Build.0 = Debug|Win32
 		{4812C1CE-8A2F-49C0-8C18-D1469EDEBAD1}.Release|Win32.ActiveCfg = Release|Win32
 		{4812C1CE-8A2F-49C0-8C18-D1469EDEBAD1}.Release|Win32.Build.0 = Release|Win32
+		{52CE204B-DDC9-4D64-9110-6CA34C9DBF09}.Debug|Win32.ActiveCfg = Debug|Win32
+		{52CE204B-DDC9-4D64-9110-6CA34C9DBF09}.Debug|Win32.Build.0 = Debug|Win32
+		{52CE204B-DDC9-4D64-9110-6CA34C9DBF09}.Release|Win32.ActiveCfg = Release|Win32
+		{52CE204B-DDC9-4D64-9110-6CA34C9DBF09}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
