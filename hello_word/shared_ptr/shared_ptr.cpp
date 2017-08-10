@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include <vector>
 #include <memory>
 #include <unordered_map>
@@ -57,12 +58,22 @@ void test3()
     std::cout << "exit test3 \n";
 }
 
+void test4()
+{
+    boost::shared_array<char> ch(new char[100]);
+    ch[0] = { '\0' };
+    //memset(ch, 0, sizeof(char)*100);
+    
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {   
     //test();
     //test2();
     //test3();
-    std::cout << Test(1, 2) << std::endl;
+    //std::cout << Test(4, 2) << std::endl;
+    test4();
+    system("pause");
 	return 0;
 }
 
