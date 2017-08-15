@@ -18,6 +18,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicTools", "BasicTools\Ba
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "knowledegeLearn", "knowledegeLearn\knowledegeLearn.vcxproj", "{11178914-8F16-4D5A-B1BC-5047D1E5D971}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree_learn", "tree_learn\tree_learn.vcxproj", "{965A17C2-A0CB-4307-95EB-150C6B8F0DB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -40,6 +42,10 @@ Global
 		{11178914-8F16-4D5A-B1BC-5047D1E5D971}.Debug|Win32.Build.0 = Debug|Win32
 		{11178914-8F16-4D5A-B1BC-5047D1E5D971}.Release|Win32.ActiveCfg = Release|Win32
 		{11178914-8F16-4D5A-B1BC-5047D1E5D971}.Release|Win32.Build.0 = Release|Win32
+		{965A17C2-A0CB-4307-95EB-150C6B8F0DB8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{965A17C2-A0CB-4307-95EB-150C6B8F0DB8}.Debug|Win32.Build.0 = Debug|Win32
+		{965A17C2-A0CB-4307-95EB-150C6B8F0DB8}.Release|Win32.ActiveCfg = Release|Win32
+		{965A17C2-A0CB-4307-95EB-150C6B8F0DB8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,7 @@
 #include <boost/thread/thread.hpp>
 #include "SSThreadPool.h"
 #include <chrono>
+using namespace std;
 
 void thread_proc1(std::string param)
 {
@@ -48,12 +49,10 @@ void custom( std::string str)
 
 }
 
-
-
-int _tmain(int argc, _TCHAR* argv[])
+void threadpooltest()
 {
     boost::thread t(boost::bind(custom, std::string("t")));
-    boost::thread t2(boost::bind(custom,std::string("t2")));
+    boost::thread t2(boost::bind(custom, std::string("t2")));
     boost::thread t3(boost::bind(custom, std::string("t3")));
     boost::thread t4(boost::bind(custom, std::string("t4")));
 
@@ -63,6 +62,35 @@ int _tmain(int argc, _TCHAR* argv[])
     t4.join();
 
     pool.stop();
+
+    system("pause");
+}
+
+void thread_proc(std::promise<int>& pr)
+{
+    cout << "in proc " << endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    //pr.set_value_at_thread_exit(9);
+    pr.set_value(9);
+    cout << "end proc " << endl;
+
+}
+
+void promise_test()
+{
+    std::promise<int> pr;
+    std::thread t(std::bind(thread_proc,std::ref(pr)));
+    std::future<int> f = pr.get_future();
+    cout << "return is " << f.get()<<endl;
+    t.join();
+    cout << "test end" << endl;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    //threadpooltest();
+
+    promise_test();
 
     system("pause");
 	return 0;
