@@ -33,8 +33,9 @@ private:
     void preTraverseRecursion(binary_tree* pNode,std::list<int>& lstValue);
     void midTraverseRecursion(binary_tree* pNode, std::list<int>& lstValue);
     void postTraverseRecursion(binary_tree* pNode, std::list<int>& lstValue);
-
+    int GetTreeDepthRecursion(binary_tree* pNode);
     //non-recursion
+    void InsertNonRecursion(binary_tree* pNode,int key);
     void preTraverseNonRecursion(binary_tree* pNode, std::list<int>& lstValue);
     void midTraverseNonRecursion(binary_tree* pNode, std::list<int>& lstValue);
     void postTraverseNonRecursion(binary_tree* pNode, std::list<int>& lstValue);
@@ -52,4 +53,7 @@ public:
     void midTraverseR(std::list<int>& lstValue);
     void postTraverseR(std::list<int>& lstValue);
 
+    int GetTreeDepthR();
+
+    void LevelTraverse();
 };

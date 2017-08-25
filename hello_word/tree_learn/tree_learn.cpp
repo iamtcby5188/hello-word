@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include "BinaryTree.h"
+#include "AVLTree.h"
 
 //ÆÕÍ¨¶þ²æÊ÷test
 void BinaryTreeNormal()
@@ -102,12 +103,49 @@ void BinaryTreeNormal()
     }
 
     std::cout << std::endl << std::endl;
+
+
+    std::cout << "tree Depth = " <<tree.GetTreeDepthR() << std::endl;
+
+    tree.LevelTraverse();
+}
+
+void AVLTree()
+{ 
+    CAVLTree tree;
+    std::list<int> lstValue;
+    for (int n = 0; n < 10;)
+    {
+        int num = rand() % 100;
+        if (std::find(lstValue.begin(), lstValue.end(), num) == lstValue.end())
+        {
+            lstValue.push_back(num);
+            n++;
+        }
+    } 
+    
+    std::cout << "origin data is:";
+    for (auto iter = lstValue.begin(); iter != lstValue.end(); iter++)
+    {
+        std::cout << *iter << ",";
+    }
+    std::cout << std::endl << std::endl;
+
+    std::cout << "begin build tree...." << std::endl;
+    for (auto iter = lstValue.begin(); iter != lstValue.end(); iter++)
+    {
+        tree.InsertNode(*iter);
+    }
+    std::cout << "end build tree...." << std::endl << std::endl;
+
+    std::cout << "tree depth is " << tree.GetDepth() << std::endl;
+    tree.PrintTree();
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-    BinaryTreeNormal();
-
+    //BinaryTreeNormal();
+    AVLTree();
 
 	return 0;
 }

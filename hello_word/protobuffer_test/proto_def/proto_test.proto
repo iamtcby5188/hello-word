@@ -1,0 +1,14 @@
+package proto_test;
+
+message course
+{
+	optional string name = 1;
+	optional int32  score = 2;
+}
+
+message student
+{
+	optional string name = 1;
+	optional int32  age  = 2;
+	repeated course score = 3;
+}

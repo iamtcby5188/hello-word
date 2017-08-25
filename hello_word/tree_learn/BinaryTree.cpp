@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "BinaryTree.h"
 #include <stack>
+#include <iostream>
+#include <queue>
 CBinaryTree::CBinaryTree()
     :m_pRoot(NULL)
 {
@@ -25,6 +27,53 @@ void CBinaryTree::InsertNode(int key)
     else
     {
         InsertNodeRecursion(m_pRoot, key);
+        //InsertNonRecursion(m_pRoot, key);
+    }
+}
+
+void CBinaryTree::InsertNonRecursion(binary_tree* pNode, int key)
+{
+    binary_tree* pInsert = new binary_tree(key);
+    binary_tree* pCur = pNode;
+    binary_tree* pParent = NULL;
+
+    while (pCur != NULL)
+    {
+        if (pCur->m_key < key)
+        {
+            if (pCur->m_rChild == NULL)
+            {
+                pCur->m_rChild = pInsert;
+                pParent = pCur;
+                pCur = pInsert;
+                break;
+            }
+            else
+            {
+                pParent = pCur;
+                pCur = pCur->m_rChild;
+            }
+        }
+        else if (pCur->m_key > key)
+        {
+            if (pCur->m_lChild == NULL)
+            {
+                pCur->m_lChild = pInsert;
+                pParent = pCur;
+                pCur = pInsert;
+                break;
+            }
+            else
+            {
+                pParent = pCur;
+                pCur = pCur->m_lChild;
+            }
+        }
+        else
+        {
+            return;
+        }
+
     }
 }
 
@@ -212,3 +261,47 @@ void CBinaryTree::postTraverseNonRecursion(binary_tree* pNode, std::list<int>& l
         }
     }
 }
+
+int CBinaryTree::GetTreeDepthR()
+{
+    return GetTreeDepthRecursion(m_pRoot);
+}
+
+int CBinaryTree::GetTreeDepthRecursion(binary_tree* pNode)
+{
+    if (pNode == NULL)
+    {
+        return 0;
+    }
+
+    int lDep = GetTreeDepthRecursion(pNode->m_lChild) ;
+    int rDep = GetTreeDepthRecursion(pNode->m_rChild) ;
+    return lDep > rDep ? (lDep + 1): (rDep + 1);
+}
+
+void CBinaryTree::LevelTraverse()
+{
+    if (m_pRoot == NULL)
+    {
+        return;
+    }
+    std::queue<binary_tree*> qNode;
+    qNode.push(m_pRoot);
+    while (!qNode.empty())
+    {
+        binary_tree* pTmp = qNode.front();
+        qNode.pop();
+        std::cout << pTmp->m_key << "  ";
+        if (pTmp->m_lChild != NULL)
+        {
+            qNode.push(pTmp->m_lChild);
+        }
+
+        if (pTmp->m_rChild != NULL)
+        {
+            qNode.push(pTmp->m_rChild);
+        }
+    }
+}
+
+

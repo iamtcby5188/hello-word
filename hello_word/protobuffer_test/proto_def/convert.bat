@@ -1,0 +1,1 @@
+protoc --java_out=.\ --cpp_out=.\cpp *.proto
