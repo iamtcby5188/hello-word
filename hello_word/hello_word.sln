@@ -22,6 +22,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree_learn", "tree_learn\tr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "protobuffer_test", "protobuffer_test\protobuffer_test.vcxproj", "{2CD98CB9-E2F9-452E-A9AD-D7A1D2BEC95D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordCapture", "WordCapture\WordCapture.vcxproj", "{196B64AB-F99F-44E5-8EF1-BB9072DC4950}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordCaptureDemo", "WordCaptureDemo\WordCaptureDemo.vcxproj", "{35BB5EE0-C188-497B-BEFD-DB8EAE7B10BA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{196B64AB-F99F-44E5-8EF1-BB9072DC4950} = {196B64AB-F99F-44E5-8EF1-BB9072DC4950}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -52,6 +59,14 @@ Global
 		{2CD98CB9-E2F9-452E-A9AD-D7A1D2BEC95D}.Debug|Win32.Build.0 = Debug|Win32
 		{2CD98CB9-E2F9-452E-A9AD-D7A1D2BEC95D}.Release|Win32.ActiveCfg = Release|Win32
 		{2CD98CB9-E2F9-452E-A9AD-D7A1D2BEC95D}.Release|Win32.Build.0 = Release|Win32
+		{196B64AB-F99F-44E5-8EF1-BB9072DC4950}.Debug|Win32.ActiveCfg = Debug|Win32
+		{196B64AB-F99F-44E5-8EF1-BB9072DC4950}.Debug|Win32.Build.0 = Debug|Win32
+		{196B64AB-F99F-44E5-8EF1-BB9072DC4950}.Release|Win32.ActiveCfg = Release|Win32
+		{196B64AB-F99F-44E5-8EF1-BB9072DC4950}.Release|Win32.Build.0 = Release|Win32
+		{35BB5EE0-C188-497B-BEFD-DB8EAE7B10BA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{35BB5EE0-C188-497B-BEFD-DB8EAE7B10BA}.Debug|Win32.Build.0 = Debug|Win32
+		{35BB5EE0-C188-497B-BEFD-DB8EAE7B10BA}.Release|Win32.ActiveCfg = Release|Win32
+		{35BB5EE0-C188-497B-BEFD-DB8EAE7B10BA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
