@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "WordCaptureSingleton.h"
-
+#include <vector>
 #include <mmsystem.h>
+#include <shellapi.h>
+#include <shlobj.h>
 #pragma comment(lib,"Winmm.lib")
 CWordCaptureSingleton* CWordCaptureSingleton::s_ins = nullptr;
 CWordCaptureSingleton* CWordCaptureSingleton::instance()
@@ -44,24 +46,12 @@ CWordCaptureSingleton::CWordCaptureSingleton()
     m_CFType[8] = CF_PALETTE;
     m_CFType[9] = CF_PENDATA;
     m_CFType[10] = CF_RIFF;
-    m_CFType[11] = CF_WAVE; 
-    m_CFType[12] =CF_UNICODETEXT;
+    m_CFType[11] = CF_WAVE;
+    m_CFType[12] = CF_UNICODETEXT;
     m_CFType[13] = CF_ENHMETAFILE;
     m_CFType[14] = CF_HDROP;
     m_CFType[15] = CF_LOCALE;
     m_CFType[16] = CF_DIBV5;
-    m_CFType[17] = CF_MAX;
-    m_CFType[18] = CF_MAX;
-    m_CFType[19] = CF_MAX;
-    m_CFType[20] = CF_OWNERDISPLAY;
-    m_CFType[21] = CF_DSPTEXT;
-    m_CFType[22] = CF_DSPBITMAP; 
-    m_CFType[23] = CF_DSPMETAFILEPICT;
-    m_CFType[24] = CF_DSPENHMETAFILE; 
-    m_CFType[25] = CF_PRIVATEFIRST;
-    m_CFType[26] = CF_PRIVATELAST;
-    m_CFType[27] = CF_GDIOBJFIRST;
-    m_CFType[28] = CF_GDIOBJLAST;
 }
 
 
@@ -141,8 +131,8 @@ void CWordCaptureSingleton::TimerThreadProc(int nFlag)
         {
             int size = m_clip_data.get_memsize();
             PVOID pb = m_clip_data.get_data();
-            char* sz = new char[size + 1];
-            memset(sz, 0, size + 1);
+            char* sz = new char[size];
+            memset(sz, 0, size);
             memcpy(sz, pb, size);
             m_cbf(sz, size);
             delete[] sz;
@@ -206,36 +196,132 @@ HWND CWordCaptureSingleton::GetWindowFromPoint()
 
 void CWordCaptureSingleton::GetOrigClipboardData()
 {
-    if (OpenClipboard(NULL) == TRUE)
+    m_old_clip_data.release();
+    UINT uFormat = CF_MAX;
+    for (int i = 0; i < 20; ++i)
     {
-        m_old_clip_data.release();
-        UINT uFormat = 0;
-        HGLOBAL hGlobalMem = nullptr;
-        PBYTE   pMemByte = nullptr;
-        for (int i = 0; i < 20; ++i)
+        uFormat = m_CFType[i];
+        if (IsClipboardFormatAvailable(uFormat))
         {
-            uFormat = m_CFType[i];
-            if (IsClipboardFormatAvailable(uFormat))
-            {
-                break;
-            }
+            break;
         }
+    }
+    if (uFormat <= 0 || uFormat >= CF_MAX)
+    {
+        return;
+    }
+    if (uFormat == CF_BITMAP || uFormat == CF_DIB)
+    {
+        OrigClipboardPicture();
+    }
+    //else if (uFormat == CF_HDROP)
+    //{
+    //    //OrigClipboardDrop();
+    //}
+    else
+    {
+        OrigClipboardData(uFormat);
+    }
+}
+
+bool CWordCaptureSingleton::OrigClipboardData(UINT uFormat)
+{
+    bool bRet = false;
+    if (OpenClipboard(m_hCurWnd) == TRUE)
+    {
+        HGLOBAL hGlobalMem = nullptr;
+        PVOID   pMemByte = nullptr;
+
         hGlobalMem = ::GetClipboardData(uFormat);
         if (hGlobalMem != nullptr)
         {
-            pMemByte = (PBYTE)::GlobalLock(hGlobalMem);
+            pMemByte = ::GlobalLock(hGlobalMem);
+            DWORD dError = GetLastError();
             if (pMemByte != nullptr)
             {
                 m_old_clip_data.release();
                 m_old_clip_data.set_format(uFormat);
                 m_old_clip_data.set_memsize(GlobalSize(hGlobalMem));
                 m_old_clip_data.set_data(pMemByte);
+                bRet = true;
             }
 
             ::GlobalUnlock(hGlobalMem);
         }
 
         CloseClipboard();
+    }
+
+    return bRet;
+}
+void CWordCaptureSingleton::OrigClipboardDrop()
+{
+    //文件列表格式和其他的格式其实是一样的，同样是文本
+    //if (OpenClipboard(m_hCurWnd) == TRUE)
+    //{
+    //    HDROP   hGlobalMem = nullptr;
+
+    //    hGlobalMem = (HDROP)::GetClipboardData(CF_HDROP);
+    //    if (hGlobalMem != nullptr)
+    //    {
+    //        PVOID p = ::GlobalLock(hGlobalMem);
+    //        int nsize = GlobalSize(hGlobalMem);
+    //        int nCount = DragQueryFile(hGlobalMem, -1, NULL, 0);
+    //        if (nCount <= 0)
+    //        {
+    //            return;
+    //        }
+    //        std::vector<std::string> vctFiles;
+    //            int nMemeSize = sizeof(DROPFILES);
+    //            for (int n = 0; n < nCount; ++n)
+    //            {
+    //                char szFile[MAX_PATH] = { 0 };
+    //                DragQueryFileA(hGlobalMem, n, szFile, sizeof(szFile));
+    //                vctFiles.push_back(std::string(szFile));
+    //                
+    //                nMemeSize += strlen(szFile) + 1;
+    //            }
+
+    //            nMemeSize += 1;
+
+    //            HGLOBAL hTmp = GlobalAlloc(GMEM_ZEROINIT | GMEM_MOVEABLE, nMemeSize);
+    //            LPDROPFILES pTmp = (LPDROPFILES)GlobalLock(hTmp);
+    //            pTmp->pFiles = sizeof(DROPFILES);
+    //            pTmp->fWide = FALSE;
+    //            
+    //            PBYTE pWrite = (PBYTE)pTmp + sizeof(DROPFILES); 
+    //            for (int n = 0; n<vctFiles.size();++n)
+    //            {
+    //                std::string& f = vctFiles.at(0);
+    //                memcpy(pWrite, f.c_str(), f.length() + 1);
+    //                pWrite += (f.length() + 1);
+    //            }
+
+    //            m_old_clip_data.release();
+    //            m_old_clip_data.set_format(CF_HDROP);
+    //            m_old_clip_data.set_memsize(nMemeSize);
+    //            m_old_clip_data.set_data(pTmp);
+    //            GlobalUnlock(hTmp);
+
+    //        ::GlobalUnlock(hGlobalMem);
+    //    }
+
+    //    CloseClipboard();
+    //}
+
+}
+void CWordCaptureSingleton::OrigClipboardPicture()
+{
+    //这两个文件使用IsClipboardFormatAvailable 是，都是可用，但是可能取不出数据
+    
+    UINT uFormats[2] = { CF_BITMAP, CF_DIB };
+    for (UINT i = 0; i < 2; ++i)
+    {
+        UINT uFormat = uFormats[i];
+        if (OrigClipboardData(uFormat))
+        {
+            break;
+        }
     }
 }
 
@@ -251,7 +337,6 @@ void CWordCaptureSingleton::GetClipboardText()
             pMemByte = ::GlobalLock(hGlobalMem);
             if (pMemByte != nullptr)
             {
-                m_clip_data.release();
                 m_clip_data.set_format(CF_TEXT);
                 m_clip_data.set_memsize(GlobalSize(hGlobalMem));
                 m_clip_data.set_data(pMemByte);
@@ -276,20 +361,25 @@ void CWordCaptureSingleton::RestoreClipboardData()
     {
         if (OpenClipboard(m_hCurWnd) == TRUE)
         {
+            char a[2][32] = {
+                "aaaa",
+                "bbbbbb"
+            };
+            int asss = sizeof(a);
             EmptyClipboard();
             int memsize = m_old_clip_data.get_memsize();
             PVOID pdata = m_old_clip_data.get_data();
             UINT uFormat = m_old_clip_data.get_format();
 
-            HANDLE hGlobalMeme = GlobalAlloc(GMEM_MOVEABLE, memsize + 1);
+            HANDLE hGlobalMeme = GlobalAlloc(GMEM_MOVEABLE, memsize);
             if (hGlobalMeme != nullptr)
             {
                 LPVOID lp = GlobalLock(hGlobalMeme);
-                memset(lp, 0, memsize + 1);
+                memset(lp, 0, memsize);
                 memcpy(lp, pdata, memsize);
 
                 GlobalUnlock(hGlobalMeme);
-                SetClipboardData(uFormat, hGlobalMeme);
+                SetClipboardData(uFormat, lp);
                 DWORD d = GetLastError();
             }
             CloseClipboard();

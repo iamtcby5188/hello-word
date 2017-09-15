@@ -32,8 +32,8 @@ public:
     {
         if (m_nMemSize > 0)
         {
-            m_hMem = malloc(m_nMemSize + 1);
-            memset(m_hMem, 0, m_nMemSize + 1);
+            m_hMem = malloc(m_nMemSize );
+            memset(m_hMem, 0, m_nMemSize );
 
             memcpy(m_hMem, data, m_nMemSize);
         }
@@ -80,8 +80,14 @@ private:
 
     HWND GetWindowFromPoint();
     void GetOrigClipboardData();
+    bool OrigClipboardData(UINT uFormat);
+    void OrigClipboardDrop();
+    void OrigClipboardPicture();
+
+
     void GetClipboardText();
     void RestoreClipboardData();
+
 private:
     bool m_bHookStart;
     HINSTANCE m_hDllInstance;
@@ -96,7 +102,7 @@ private:
 
     bool m_is_copy;  //是否正在识别
     std::function<void(char*, int)>  m_cbf;
-    int m_CFType[29];
+    int m_CFType[18];
 private:
     CWordCaptureSingleton();
     ~CWordCaptureSingleton();
