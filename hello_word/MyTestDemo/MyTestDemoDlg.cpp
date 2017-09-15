@@ -1,22 +1,17 @@
 
-// WordCaptureDemoDlg.cpp : 实现文件
+// MyTestDemoDlg.cpp : 实现文件
 //
 
 #include "stdafx.h"
-#include "WordCaptureDemo.h"
-#include "WordCaptureDemoDlg.h"
+#include "MyTestDemo.h"
+#include "MyTestDemoDlg.h"
 #include "afxdialogex.h"
-//#include "../WordCaptureDll/WordCapture.h"
-#include "../WordCapture/WordCapture.h"
-#include <conio.h>
-//#pragma comment(lib,"WordCaptureDll.lib")
-#pragma comment(lib,"WordCapture.lib")
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-CWordCaptureDemoDlg* pDlg;
-#define  WM_WORDCAPTURE (WM_USER + 1000)
+
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
@@ -48,41 +43,35 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CWordCaptureDemoDlg 对话框
+// CMyTestDemoDlg 对话框
 
 
 
-CWordCaptureDemoDlg::CWordCaptureDemoDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CWordCaptureDemoDlg::IDD, pParent)
+CMyTestDemoDlg::CMyTestDemoDlg(CWnd* pParent /*=NULL*/)
+	: CDialogEx(CMyTestDemoDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CWordCaptureDemoDlg::DoDataExchange(CDataExchange* pDX)
+void CMyTestDemoDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CWordCaptureDemoDlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CMyTestDemoDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-    ON_WM_TIMER()
-    ON_BN_CLICKED(IDOK, &CWordCaptureDemoDlg::OnBnClickedOk)
-    ON_MESSAGE(WM_KICKIDLE,OnKickIdle)
-    ON_BN_CLICKED(IDC_BUTTON1, &CWordCaptureDemoDlg::OnBnClickedButton1)
-    ON_BN_CLICKED(IDC_BUTTON2, &CWordCaptureDemoDlg::OnBnClickedButton2)
-    ON_WM_DESTROY()
-    ON_MESSAGE(WM_WORDCAPTURE,OnWordCapture)
-    ON_BN_CLICKED(IDC_BUTTON3, &CWordCaptureDemoDlg::OnBnClickedButton3)
+    ON_BN_CLICKED(IDOK, &CMyTestDemoDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
-// CWordCaptureDemoDlg 消息处理程序
+// CMyTestDemoDlg 消息处理程序
 
-BOOL CWordCaptureDemoDlg::OnInitDialog()
+BOOL CMyTestDemoDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+
 	// 将“关于...”菜单项添加到系统菜单中。
 
 	// IDM_ABOUTBOX 必须在系统命令范围内。
@@ -109,14 +98,11 @@ BOOL CWordCaptureDemoDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO:  在此添加额外的初始化代码
-    //AllocConsole();
-    pDlg = this;
-    WC_Init();
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
-void CWordCaptureDemoDlg::OnSysCommand(UINT nID, LPARAM lParam)
+void CMyTestDemoDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -133,7 +119,7 @@ void CWordCaptureDemoDlg::OnSysCommand(UINT nID, LPARAM lParam)
 //  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，
 //  这将由框架自动完成。
 
-void CWordCaptureDemoDlg::OnPaint()
+void CMyTestDemoDlg::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -152,69 +138,28 @@ void CWordCaptureDemoDlg::OnPaint()
 		// 绘制图标
 		dc.DrawIcon(x, y, m_hIcon);
 	}
+	else
+	{
+		CDialogEx::OnPaint();
+	}
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
 //显示。
-HCURSOR CWordCaptureDemoDlg::OnQueryDragIcon()
+HCURSOR CMyTestDemoDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CWordCaptureDemoDlg::OnBnClickedOk()
-{
-     CDialogEx::OnOK();
-}
-
-void CWordCaptureDemoDlg::OnTimer(UINT_PTR nIDEvent)
-{
-
-}
- 
-LRESULT CWordCaptureDemoDlg::OnKickIdle(WPARAM wp, LPARAM lp)
-{
-    return 0;
-}
 
 
-void CWordCaptureDemoDlg::OnBnClickedButton1()
+void CMyTestDemoDlg::OnBnClickedOk()
 {
     // TODO:  在此添加控件通知处理程序代码
-}
+    HINSTANCE bbb = LoadLibraryA("gdi32.dll");
 
-
-void CWordCaptureDemoDlg::OnBnClickedButton2()
-{
-    // TODO:  在此添加控件通知处理程序代码
-    WC_StopCapture();
-}
-
-
-void CWordCaptureDemoDlg::OnDestroy()
-{
-    CDialogEx::OnDestroy();
-    WC_Uninit();
-    // TODO:  在此处添加消息处理程序代码
-}
-
-LRESULT CWordCaptureDemoDlg::OnWordCapture(WPARAM wp, LPARAM lp)
-{
-    GetDlgItem(IDC_SHOWTEXT)->SetWindowText(m_str);
-    return 0;
-}
-
-void proc(char* sz, int size)
-{
-    CStringA sA(sz);
-    pDlg->m_str = CString(sA);
-    pDlg->PostMessage(WM_WORDCAPTURE, NULL, NULL);
-
-}
-
-void CWordCaptureDemoDlg::OnBnClickedButton3()
-{
-    //WC_StartCapture();
-    WC_StartCapture(proc);
-
-    // TODO:  在此添加控件通知处理程序代码
+    CString str;
+    str.Format(_T("wordcapture.dll hinst = %p"), bbb);
+    OutputDebugString(str);
+    //CDialogEx::OnOK();
 }

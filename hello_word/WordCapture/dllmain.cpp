@@ -1,5 +1,6 @@
 // dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include "stdafx.h"
+#include "WordCaptureSingleton.h"
 //#include "WordCaptureSingleton.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,
@@ -10,8 +11,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
     case DLL_PROCESS_ATTACH:
-    {
-    }
+        CWordCaptureSingleton::instance()->SetDllHandle(hModule);
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
 	case DLL_PROCESS_DETACH:

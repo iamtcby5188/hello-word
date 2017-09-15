@@ -14,14 +14,14 @@ void thread_proc1(std::string param)
     while (n < 100)
     {
         boost::this_thread::sleep(boost::posix_time::milliseconds(100));
-        std::cout << param << "   " <<n<< std::endl;
+        std::cout << param << "   " << n << std::endl;
         n++;
     }
 }
 
 void start_thread1()
 {
-    boost::thread  t(boost::bind(thread_proc1,"proc 1"));
+    boost::thread  t(boost::bind(thread_proc1, "proc 1"));
     boost::thread t2(boost::bind(thread_proc1, "prco 2"));
     t.join();
     t2.join();
@@ -30,16 +30,16 @@ void start_thread1()
 }
 
 CSSThreadPool pool(4);
-void custom( std::string str)
+void custom(std::string str)
 {
     while (true)
     {
         std::future<std::string> res;
         res = pool.enqueue(([=](int a){
-            std::cout << str<<"   "<<a << std::endl;
+            std::cout << str << "   " << a << std::endl;
             std::this_thread::sleep_for(std::chrono::seconds(1));
-            return str ;
-        }),1);
+            return str;
+        }), 1);
 
         std::cout << str << "   begin" << std::endl;
         std::cout << res.get() << "    mid" << std::endl;
@@ -79,9 +79,9 @@ void thread_proc(std::promise<int>& pr)
 void promise_test()
 {
     std::promise<int> pr;
-    std::thread t(std::bind(thread_proc,std::ref(pr)));
+    std::thread t(std::bind(thread_proc, std::ref(pr)));
     std::future<int> f = pr.get_future();
-    cout << "return is " << f.get()<<endl;
+    cout << "return is " << f.get() << endl;
     t.join();
     cout << "test end" << endl;
 }
@@ -93,6 +93,5 @@ int _tmain(int argc, _TCHAR* argv[])
     promise_test();
 
     system("pause");
-	return 0;
+    return 0;
 }
-

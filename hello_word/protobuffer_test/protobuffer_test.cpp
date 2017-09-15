@@ -13,6 +13,8 @@ using namespace ::google::protobuf;
 int _tmain(int argc, _TCHAR* argv[])
 {
     proto_test::student stu;
+    const google::protobuf::FieldDescriptor* f = stu.GetDescriptor()->FindFieldByNumber(1);
+
     stu.set_age(20);
     stu.set_name("ÕÅÈı");
 

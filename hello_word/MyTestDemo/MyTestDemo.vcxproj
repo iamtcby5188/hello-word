@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{35BB5EE0-C188-497B-BEFD-DB8EAE7B10BA}</ProjectGuid>
-    <RootNamespace>WordCaptureDemo</RootNamespace>
+    <ProjectGuid>{FE7FDE02-FEB2-4A65-A4DF-82675F8A45C7}</ProjectGuid>
+    <RootNamespace>MyTestDemo</RootNamespace>
     <Keyword>MFCProj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -55,12 +55,10 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalOptions>/D _CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -88,7 +86,6 @@ copy "$(OutDir)$(TargetName).pdb" $(SolutionDir)bin\$(Configuration)\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalOptions>/D _CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -111,35 +108,35 @@ copy "$(OutDir)$(TargetName).pdb" $(SolutionDir)bin\$(Configuration)\
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyTestDemo.h" />
+    <ClInclude Include="MyTestDemoDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="WordCaptureDemo.h" />
-    <ClInclude Include="WordCaptureDemoDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyTestDemo.cpp" />
+    <ClCompile Include="MyTestDemoDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="WordCaptureDemo.cpp" />
-    <ClCompile Include="WordCaptureDemoDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="WordCaptureDemo.rc" />
+    <ResourceCompile Include="MyTestDemo.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\WordCaptureDemo.rc2" />
+    <None Include="res\MyTestDemo.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\WordCaptureDemo.ico" />
+    <Image Include="res\MyTestDemo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="WordCaptureDemo.rc" />
+      <UserProperties RESOURCE_FILE="MyTestDemo.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

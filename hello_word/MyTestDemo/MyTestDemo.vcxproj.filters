@@ -18,34 +18,46 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyTestDemo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTestDemoDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="WordCapture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="struct_define.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="WordCaptureSingleton.h">
+    <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyTestDemo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTestDemoDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="WordCapture.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="WordCaptureSingleton.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MyTestDemo.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\MyTestDemo.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MyTestDemo.ico">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

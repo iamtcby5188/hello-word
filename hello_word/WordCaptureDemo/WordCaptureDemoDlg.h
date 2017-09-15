@@ -28,7 +28,17 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+    afx_msg void OnTimer(UINT_PTR nIDEvent);
+    
 	DECLARE_MESSAGE_MAP()
 public:
     afx_msg void OnBnClickedOk();
+    afx_msg LRESULT OnKickIdle(WPARAM wp, LPARAM lp);
+    afx_msg LRESULT OnWordCapture(WPARAM wp, LPARAM lp);
+    afx_msg void OnBnClickedButton1();
+    afx_msg void OnBnClickedButton2();
+    afx_msg void OnDestroy();
+    CString m_str;
+public:
+    afx_msg void OnBnClickedButton3();
 };
