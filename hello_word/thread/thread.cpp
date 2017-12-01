@@ -24,6 +24,7 @@ void start_thread1()
     boost::thread  t(boost::bind(thread_proc1, "proc 1"));
     boost::thread t2(boost::bind(thread_proc1, "prco 2"));
     t.join();
+    std::cout << "aaaaaaaaaaaaa" << std::endl;
     t2.join();
     std::cout << "exit start_thread1" << std::endl;
     return;
@@ -86,11 +87,19 @@ void promise_test()
     cout << "test end" << endl;
 }
 
+void test()
+{
+
+    cout<<__FILE__<<"     " <<__FUNCTION__<<"      "<< __LINE__ << endl;
+}
 int _tmain(int argc, _TCHAR* argv[])
 {
+    cout << __FUNCTION__ <<"    "<< __LINE__ << endl;
+    test();
+    //start_thread1();
     //threadpooltest();
 
-    promise_test();
+    //promise_test();
 
     system("pause");
     return 0;

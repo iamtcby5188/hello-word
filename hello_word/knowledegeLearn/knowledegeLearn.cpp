@@ -41,6 +41,8 @@ void knowledge1()
     unsigned long g;
     short h;
     unsigned short i;
+    long long ll;
+
     std::cout << sizeof(a) << std::endl;
     std::cout << sizeof(b) << std::endl;
     std::cout << sizeof(c) << std::endl;
@@ -50,6 +52,8 @@ void knowledge1()
     std::cout << sizeof(g) << std::endl;
     std::cout << sizeof(h) << std::endl;
     std::cout << sizeof(i) << std::endl;
+    std::cout << sizeof(ll) << std::endl;
+
 }
 
 int fun1(int a, int b)
@@ -135,12 +139,34 @@ void knowledge4()
     cout << "-----------------end------------------" << endl;
 }
 
+class c_1
+{
+public:
+    c_1();
+    ~c_1();
+
+    void init(int b){ i = b; }
+    static void init_s(){}
+private:
+    int i;
+    double d;
+    int iii;
+};
+
+void konwledge5()
+{
+    cout << sizeof(int) << endl;
+    cout << sizeof(double) << endl;
+    cout << sizeof(c_1) << endl;
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
     //knowledge1();
     //knowledge2();
     //knowledge3();
-    knowledge4();
+    //knowledge4();
+    konwledge5();
     system("pause");
 	return 0;
 }

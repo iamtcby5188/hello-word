@@ -66,13 +66,20 @@ void test4()
     
 }
 
+void test5()
+{
+    implementation* p = new implementation();
+    boost::shared_ptr<implementation> pp =  boost::shared_ptr<implementation>(p);
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {   
     //test();
     //test2();
     //test3();
     //std::cout << Test(4, 2) << std::endl;
-    test4();
+    //test4();
+    test5();
     system("pause");
 	return 0;
 }
