@@ -31,26 +31,26 @@ private:
 inline CSSThreadPool::CSSThreadPool(size_t nCount)
     :m_bStop(false)
 {
-    for (size_t n = 0; n < nCount; n++)
-    {
-        m_vThreads.emplace_back(
-            [this]{
-                while (true)
-                {
-                    std::function<void()> task;
-                    {
-                        std::unique_lock<std::mutex> lock(this->m_mutex);
-                        this->m_cond.wait(lock, [this]{return this->m_bStop || !this->m_vTasks.empty(); });
-                        if (this->m_bStop && this->m_vTasks.empty()) return;
-                        task = std::move(this->m_vTasks.front());
-                        this->m_vTasks.pop();
-                    }
+    //for (size_t n = 0; n < nCount; n++)
+    //{
+    //    m_vThreads.emplace_back(
+    //        [this]{
+    //            while (true)
+    //            {
+    //                std::function<void()> task;
+    //                {
+    //                    std::unique_lock<std::mutex> lock(this->m_mutex);
+    //                    this->m_cond.wait(lock, [this]{return this->m_bStop || !this->m_vTasks.empty(); });
+    //                    if (this->m_bStop && this->m_vTasks.empty()) return;
+    //                    task = std::move(this->m_vTasks.front());
+    //                    this->m_vTasks.pop();
+    //                }
 
-                    task();                    
-                }
-            }
-        );
-    }
+    //                task();                    
+    //            }
+    //        }
+    //    );
+    //}
 }
 
 CSSThreadPool::~CSSThreadPool()
