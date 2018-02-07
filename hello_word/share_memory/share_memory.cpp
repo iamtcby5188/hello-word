@@ -11,12 +11,29 @@
 using namespace std;
 struct test 
 {
-    char a[32];
-    char b[4096];
+    void* p1;
+    void* p2;
+    
 };
 
+struct test2
+{
+    long long l1;
+    long long l2;
+};
 int _tmain(int argc, _TCHAR* argv[])
 {
+    int a = sizeof(test);
+    int b = sizeof(test2);
+    int c = sizeof(long long);
+    int d = sizeof(unsigned long);
+    int e = sizeof(void*);
+    char* char_a = "123567";
+    char  char_b[20] = "1234";
+    int f = strlen(char_a);
+    int g = strlen(char_b);
+    int h = sizeof(char_a);
+    int i = sizeof(char_b);
 #ifdef _WIN32
     sql_task task;
 #else

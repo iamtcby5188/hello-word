@@ -31,7 +31,7 @@ sql_share_memory_no_boost::sql_share_memory_no_boost()
 
     key_t key = ftok("../", 2015);
 
-    m_shmid = shmget(key, SHARED_MEMORY_SIZE,(IPC_CREAT | 0666));
+    m_shmid = shmget(key, SHARED_MEMORY_SIZE,(IPC_CREAT | 0600));
 
 }
 

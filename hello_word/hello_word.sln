@@ -35,6 +35,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RegularExpression", "Regula
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "share_memory", "share_memory\share_memory.vcxproj", "{44326C4E-3E50-4D27-92A2-7C06EDD77DC7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "read_write_buffer", "read_write_buffer\read_write_buffer.vcxproj", "{8FB2153C-3944-439D-B89E-80E2E6877326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -85,6 +87,10 @@ Global
 		{44326C4E-3E50-4D27-92A2-7C06EDD77DC7}.Debug|Win32.Build.0 = Debug|Win32
 		{44326C4E-3E50-4D27-92A2-7C06EDD77DC7}.Release|Win32.ActiveCfg = Release|Win32
 		{44326C4E-3E50-4D27-92A2-7C06EDD77DC7}.Release|Win32.Build.0 = Release|Win32
+		{8FB2153C-3944-439D-B89E-80E2E6877326}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8FB2153C-3944-439D-B89E-80E2E6877326}.Debug|Win32.Build.0 = Debug|Win32
+		{8FB2153C-3944-439D-B89E-80E2E6877326}.Release|Win32.ActiveCfg = Release|Win32
+		{8FB2153C-3944-439D-B89E-80E2E6877326}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
